@@ -149,7 +149,8 @@ def generate_gemini_report(news_df, indices_df, api_key):
     Future Outlook & Timeline
     • Project key milestones for tariff implementation
     • Identify critical indicators to monitor over next 30/60/90 days
-    • Provide probability assessment of various scenarios
+    • Provide probability assessment of various scenarios with proper justification,
+           Strictly use realistic figures and numbers 
     
     Interesting Take
     . Give your take on some "winners" are actually losing long-term market share, while certain "losers" are 
