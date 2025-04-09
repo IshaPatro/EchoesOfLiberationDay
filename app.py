@@ -19,20 +19,20 @@ import os
 warnings.filterwarnings('ignore')
 
 def get_gemini_key():
-    is_cloud = os.environ.get("STREAMLIT_SERVER_HEADLESS") == "1"
-    key = None
+    key = os.environ.get("GEMINI_API_KEY")
+    if key:
+        return key
 
+    is_cloud = os.environ.get("STREAMLIT_SERVER_HEADLESS") == "1"
     if is_cloud:
-        key = os.environ.get("GEMINI_API_KEY")
-        if not key:
-            st.error("❌ Gemini API key missing in cloud environment! Add GEMINI_API_KEY to your environment variables")
+        st.error("❌ Gemini API key missing in cloud environment! Add GEMINI_API_KEY to your environment variables")
+        return None
     else:
         try:
             from config import GEMINI_API_KEY
-            key = GEMINI_API_KEY
+            return GEMINI_API_KEY
         except ImportError:
             return None
-    return key
 
 st.set_page_config(page_title="Tariff Impact Analysis", page_icon="📊", layout="wide")
 
