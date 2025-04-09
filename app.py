@@ -22,15 +22,9 @@ def get_gemini_key():
     try:
         import config
         GEMINI_API_KEY = config.GEMINI_API_KEY
-        st.info("Using Gemini API key from config.py (local)")
     except (ImportError, AttributeError, ModuleNotFoundError):
-        # Fallback to environment variable
         GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-        if GEMINI_API_KEY:
-            st.info("Using Gemini API key from environment variable")
-        else:
-            st.error("Gemini API key not found. Please set it in config.py or as an environment variable.")
-
+    return GEMINI_API_KEY
 
 st.set_page_config(page_title="Tariff Impact Analysis", page_icon="📊", layout="wide")
 
