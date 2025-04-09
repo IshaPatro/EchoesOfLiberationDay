@@ -19,12 +19,16 @@ import os
 warnings.filterwarnings('ignore')
 
 def get_gemini_key():
-    try:
-        import config
-        GEMINI_API_KEY = config.GEMINI_API_KEY
-    except (ImportError, AttributeError, ModuleNotFoundError):
-        GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-    return GEMINI_API_KEY
+    is_cloud = os.environ.get("STREAMLIT_SERVER_HEADLESS") == "1"
+
+    if is_cloud:
+        return os.environ.get("GEMINI_API_KEY")  
+    else:
+        try:
+            from config import GEMINI_API_KEY
+            return GEMINI_API_KEY
+        except ImportError:
+            return None
 
 st.set_page_config(page_title="Tariff Impact Analysis", page_icon="📊", layout="wide")
 
