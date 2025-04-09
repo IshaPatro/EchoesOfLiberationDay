@@ -30,7 +30,6 @@ def get_gemini_key():
         except ImportError:
             return os.environ.get("GEMINI_API_KEY")
 
-    # Error handling for cloud environments
     is_cloud = os.environ.get("STREAMLIT_SERVER_HEADLESS") == "1"
     if is_cloud:
         st.error("❌ Gemini API key missing! Configure either:\n1. Set GEMINI_API_KEY environment variable\n2. Add to config.py file")
@@ -41,7 +40,7 @@ st.set_page_config(page_title="Tariff Impact Analysis", page_icon="📊", layout
 st.title("Effects of Tariffs on Global Markets")
 st.markdown("""
 This application analyzes the impact of tariffs on global markets by examining market indexes 
-between April 1-8, 2025. The analysis includes animated visualizations of market performance 
+between April 1st-8th, 2025. The analysis includes animated visualizations of market performance 
 and insights on affected countries and sectors.
 """)
 
@@ -102,7 +101,7 @@ def generate_gemini_report(news_df, indices_df, api_key):
     prompt = f"""
     Analyze this financial market data and current trade news to generate a comprehensive, data-driven report on tariff impacts:
     
-    MARKET DATA (April 1-8, 2025):
+    MARKET DATA (April 1st-8th, 2025):
     {market_data}
     
     RECENT TRADE NEWS:
@@ -220,7 +219,6 @@ def main():
     
     df['ISO3'] = df['Country'].map(country_iso3_codes)
     
-    # Create tabs for Market Overview and News
     tab1, tab2 = st.tabs(["Market Overview", "News"])
     
     with tab1:
@@ -648,7 +646,6 @@ def main():
             title = news['title']
             url = news['url']
             
-            # Get country ISO code for flag
             iso_code = country_iso_codes.get(country, 'xx').lower()
             
             st.markdown(f"""
