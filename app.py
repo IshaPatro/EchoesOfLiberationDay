@@ -31,7 +31,7 @@ def get_gemini_key():
             from config import GEMINI_API_KEY
             key = GEMINI_API_KEY
         except ImportError:
-            st.error("""🔑 Gemini API Limit Reached""")
+            return None
     return key
 
 st.set_page_config(page_title="Tariff Impact Analysis", page_icon="📊", layout="wide")
@@ -330,7 +330,7 @@ def main():
         with st.spinner('🧠 Generating AI-powered analysis...'):
             api_key = get_gemini_key()
             if not api_key:
-                st.error("🚫 Gemini API key not configured. See error messages above for setup instructions")
+                st.error("🚫 Gemini API limit reached!!")
                 return
             report = generate_gemini_report(news_df, indices_df, api_key)
             
