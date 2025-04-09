@@ -19,20 +19,22 @@ import os
 warnings.filterwarnings('ignore')
 
 def get_gemini_key():
-    key = os.environ.get("GEMINI_API_KEY")
-    if key:
-        return key
-
     is_cloud = os.environ.get("STREAMLIT_SERVER_HEADLESS") == "1"
     if is_cloud:
-        st.error("❌ Gemini API key missing in cloud environment! Add GEMINI_API_KEY to your environment variables")
-        return None
+        return st.secrets.get("GEMINI_API_KEY")
     else:
         try:
             from config import GEMINI_API_KEY
-            return GEMINI_API_KEY
+            if GEMINI_API_KEY:
+                return GEMINI_API_KEY
         except ImportError:
-            return None
+            return os.environ.get("GEMINI_API_KEY")
+
+    # Error handling for cloud environments
+    is_cloud = os.environ.get("STREAMLIT_SERVER_HEADLESS") == "1"
+    if is_cloud:
+        st.error("❌ Gemini API key missing! Configure either:\n1. Set GEMINI_API_KEY environment variable\n2. Add to config.py file")
+        return None
 
 st.set_page_config(page_title="Tariff Impact Analysis", page_icon="📊", layout="wide")
 
@@ -325,13 +327,12 @@ def main():
     with tab1:
         st.markdown("<h4 style='text-align: center;'>AI-Powered Tariff Impact Analysis</h4>", unsafe_allow_html=True)
         
-        indices_df = pd.read_csv("global_indices.csv")       
+        indices_df = pd.read_csv("global_indices.csv") 
+        api_key = get_gemini_key()
+        if not api_key:
+            st.error("🚫 Gemini API limit reached!! Please try again after some time.")     
         
-        with st.spinner('🧠 Generating AI-powered analysis...'):
-            api_key = get_gemini_key()
-            if not api_key:
-                st.error("🚫 Gemini API limit reached!!")
-                return
+        with st.spinner('🧠 Generating AI-powered analysis...'):          
             report = generate_gemini_report(news_df, indices_df, api_key)
             
             if report:
