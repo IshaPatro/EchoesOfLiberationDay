@@ -58,7 +58,7 @@ def display_report(report_text):
     if not report_text:
         return
     
-    st.markdown('<h2 class="report-title">Global Tariff Impact Report</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="report-title">Echoes of Liberation Day</h2>', unsafe_allow_html=True)
     st.markdown(report_text)
 
     st.markdown("""
@@ -99,7 +99,7 @@ def generate_gemini_report(news_df, indices_df, api_key):
     news_headlines = news_df.head(5).to_dict('records')
     
     prompt = f"""
-    Analyze this financial market data and current trade news to generate a comprehensive, data-driven report on tariff impacts:
+    Analyze this financial market data and current trade news to generate a comprehensive, data-driven titled "Echoes of Liberation Day" report on tariff impacts:
     
     MARKET DATA (April 1st-7th, 2025):
     {market_data}
@@ -107,7 +107,7 @@ def generate_gemini_report(news_df, indices_df, api_key):
     RECENT TRADE NEWS:
     {news_headlines}
     
-    Create a polished, professional reporttitled "Echoes of Liberation Day" with the following EXACT sections:
+    Create a polished, professional report with the following EXACT sections:
     
     Executive Summary
     • Provide a concise overview of key findings and tariff impact (150 words)
@@ -335,7 +335,7 @@ def main():
             report = generate_gemini_report(news_df, indices_df, api_key)
             
             if report:
-                st.markdown('<h2 class="report-title">Global Tariff Impact Report</h2>', 
+                st.markdown('<h2 class="report-title">Echoes of Liberation Day</h2>', 
                            unsafe_allow_html=True)
                 st.divider()
                 
@@ -413,7 +413,7 @@ def main():
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Global Tariff Impact Report</title>
+                    <title>Echoes of Liberation Day</title>
                     <style>
                         body {{ 
                             font-family: 'Segoe UI', Arial, sans-serif; 
@@ -546,7 +546,7 @@ def main():
                 <body>
                     <div class="container">
                         <header>
-                            <h1>Global Tariff Impact Report</h1>
+                            <h1>Echoes of Liberation Day</h1>
                             <h4>Analysis Period: April 1st - 7th, 2025</h>
                         </header>
                         
