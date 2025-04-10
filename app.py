@@ -37,10 +37,10 @@ def get_gemini_key():
 
 st.set_page_config(page_title="Tariff Impact Analysis", page_icon="📊", layout="wide")
 
-st.title("Effects of Tariffs on Global Markets")
+st.title("Echoes of Liberation Day")
 st.markdown("""
 This application analyzes the impact of tariffs on global markets by examining market indexes 
-between April 1st-8th, 2025. The analysis includes animated visualizations of market performance 
+between April 1st-7th, 2025. The analysis includes animated visualizations of market performance 
 and insights on affected countries and sectors.
 """)
 
@@ -101,13 +101,13 @@ def generate_gemini_report(news_df, indices_df, api_key):
     prompt = f"""
     Analyze this financial market data and current trade news to generate a comprehensive, data-driven report on tariff impacts:
     
-    MARKET DATA (April 1st-8th, 2025):
+    MARKET DATA (April 1st-7th, 2025):
     {market_data}
     
     RECENT TRADE NEWS:
     {news_headlines}
     
-    Create a polished, professional report with the following EXACT sections:
+    Create a polished, professional reporttitled "Echoes of Liberation Day" with the following EXACT sections:
     
     Executive Summary
     • Provide a concise overview of key findings and tariff impact (150 words)
@@ -226,7 +226,7 @@ def main():
         
         with col_stats:
             st.markdown("<h4 style='text-align: center;'>Analysis Period</h4>", unsafe_allow_html=True)
-            st.markdown("<h6 style='text-align: center;'>1st - 8th April, 2025</h6>", unsafe_allow_html=True)
+            st.markdown("<h6 style='text-align: center;'>1st - 7th April, 2025</h6>", unsafe_allow_html=True)
             
             st.markdown(f"<div style='text-align: center; border: 1px solid #f0f0f0; border-radius: 5px; padding: 5px 3px; margin-bottom: 5px;'>"
                       f"<div style='font-size: 0.7em; color: gray;'>Most Affected</div>"
@@ -547,7 +547,7 @@ def main():
                     <div class="container">
                         <header>
                             <h1>Global Tariff Impact Report</h1>
-                            <h4>Analysis Period: April 1st - 8th, 2025</h>
+                            <h4>Analysis Period: April 1st - 7th, 2025</h>
                         </header>
                         
                         <div class="content">
